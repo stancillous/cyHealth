@@ -25,7 +25,7 @@
                         <h1 ref="countryName" class="country-name"></h1>
                         <div class="img-popln">
                             <img class="population-img" src="../assets/people.png" alt="population image">
-                            <span ref="countryPopulation" class="total-population"> people</span>
+                            <span ref="countryPopulation" class="total-population"></span>
                         </div>
                     </div>
 
@@ -154,7 +154,6 @@
                         }
                     })
                     let data = await response.json()
-                    console.log(data.response[0])
 
                     //APPEND TO COUNTRY INFO SECTION
                     this.$refs.country.textContent = data.response[0].country
@@ -187,7 +186,7 @@
                     //chart
                     for(let index=0;index<6;index++){
                     this.deaths.push(data.response[index].deaths['1M_pop'])
-                    this.cases.push(data.response[index].cases.active)
+                    this.cases.push(data.response[index].cases.new)
                     this.tests.push(data.response[index].tests['1M_pop']/100)
                     }
 
@@ -408,12 +407,14 @@ $web-color:rgb(23, 82, 191);
         max-width: 1000px;
         margin: 3rem auto;
         padding: 0 5rem;
-        border-bottom: 1px solid $borderColors ;
+        padding: 0 4rem 0 5rem;
+        // border-bottom: 1px solid $borderColors ;
         .c-div{
             .content-div{
                 display: flex;
-                align-items: center;
+                align-items: flex-end;
                 justify-content: space-between;
+                border-bottom: 1px solid $borderColors ;
                 .country-div{
                     .country-name{
                         font-weight: 900;
@@ -424,7 +425,6 @@ $web-color:rgb(23, 82, 191);
                     }
                     
                     .img-popln{
-                        margin-top: 1.2rem;
                         display: flex;
                         align-items: center;
                         .population-img{
@@ -434,25 +434,21 @@ $web-color:rgb(23, 82, 191);
                         .total-population{
                             font-size: 1.6rem;
                             font-weight: 600;
-                            opacity: .9;
+                            opacity: .8;
                         }
                     }
                     
                 }
                 
                 .addn{
-                    padding-top:4.7rem;
-                    padding-right: 1rem;
+                    padding-right: .5rem;
                     font-weight: 600;
-                    .country-name{
+                    .country-name, .continent-name{
+                        white-space: nowrap;
+                        opacity: .8;
                         text-transform: capitalize;
                         font-size: 1.5rem;
-                        padding-right: .2rem;
-                    }
-                    .continent-name{
-                        font-size: 1.5rem;
-                        padding-left: .2rem;
-                        text-transform: capitalize;
+                        padding: 0 .2rem;
                     }
                 }
             }
@@ -539,6 +535,7 @@ $web-color:rgb(23, 82, 191);
         margin: 5rem auto;
         max-width: 1000px;
         padding: 0 1rem;
+        height: 40rem;
         display: none;
 }
 
@@ -549,15 +546,19 @@ $web-color:rgb(23, 82, 191);
 }
 
 
-@media screen and (max-width:500px) {
+@media screen and (max-width:510px) {
     .country-info-section .c-div .content-div{
         .country-div{
             .country-name{
                 font-size: 2rem;
             }
-            .img-popln .population-img .total-population{
+            .img-popln .total-population{
                 font-size: 1.3rem;
             }
+        }
+
+        .addn .country-name, .continent-name{
+            font-size: 1.3rem;
         }
     } 
 
