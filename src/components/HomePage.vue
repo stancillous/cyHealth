@@ -94,9 +94,11 @@
                     
                     }
 
+                    console.log(select)
                     document.querySelector('.loading-div').classList.add('hide-loading-div')
                     document.querySelector('.hp-content').classList.add('show-page-content')
-             
+                    console.log('done')
+
                     } catch (error) {
                     console.log(error.message)
 
@@ -145,6 +147,7 @@ $web-color:rgb(23, 82, 191);
     opacity: 1;
     transition: all .2s ease-in-out;
 }
+
 .top{
     margin: 3rem 1rem;
     .t-container{
