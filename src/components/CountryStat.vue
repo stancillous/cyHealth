@@ -130,7 +130,8 @@
                 deaths:[],
                 cases:[],
                 tests:[],
-                labels:['2022-11-04','2022-11-06','2022-11-07','2022-11-08','2022-11-09','2022-11-10','2022-11-11','2022-11-12','2022-11-13','2022-11-14','2022-11-15','2022-11-16']
+                // labels:['2022-11-04','2022-11-06','2022-11-07','2022-11-08','2022-11-09','2022-11-10','2022-11-11','2022-11-12','2022-11-13','2022-11-14','2022-11-15','2022-11-16']
+                labels:['2022-11-12','2022-11-13','2022-11-14','2022-11-15','2022-11-16']
             }
         },
 
@@ -153,6 +154,8 @@
                         }
                     })
                     let data = await response.json()
+                    console.log(data.response[0])
+
                     //APPEND TO COUNTRY INFO SECTION
                     this.$refs.country.textContent = data.response[0].country
                     this.$refs.countryName.textContent = data.response[0].country
@@ -182,9 +185,9 @@
                     document.querySelector('.hp-content').classList.add('show-page-content')
              
                     //chart
-                    for(let index=0;index<12;index++){
+                    for(let index=0;index<6;index++){
                     this.deaths.push(data.response[index].deaths['1M_pop'])
-                    this.cases.push(data.response[index].cases.critical)
+                    this.cases.push(data.response[index].cases.active)
                     this.tests.push(data.response[index].tests['1M_pop']/100)
                     }
 
@@ -205,8 +208,8 @@
                 Chart.defaults.color='black'
                 Chart.defaults.font.size = 12;
                 Chart.defaults.opacity = .8;
-                Chart.defaults.font.weight = 500;
-                Chart.defaults.font.family = 'satoshi';
+                Chart.defaults.font.weight = 400;
+                Chart.defaults.font.family = 'EB Garamond';
 
                 new Chart(ctx, {
                 type: 'bar',
@@ -241,10 +244,26 @@
                 
                 options: {
                     responsive: true,
+                    maintainAspectRatio:false,
+                    aspectRatio:1|2,
                     scales: {
-                    y: {
-                        beginAtZero: true
-                    }
+
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                color: 'blue',
+                                display: true,
+                                text: 'Tests/ Cases/ Deaths'
+                                }
+                        },
+                        x:{
+                            title: {
+                            color: 'blue',
+                            display: true,
+                            text: 'Days',
+                            size:14
+                            }
+                        }
                     },
                     plugins:{
                             //THE LEGEND
@@ -405,7 +424,7 @@ $web-color:rgb(23, 82, 191);
                     }
                     
                     .img-popln{
-                        margin-top: 1rem;
+                        margin-top: 1.2rem;
                         display: flex;
                         align-items: center;
                         .population-img{
@@ -414,7 +433,7 @@ $web-color:rgb(23, 82, 191);
                         }
                         .total-population{
                             font-size: 1.6rem;
-                            font-weight: bold;
+                            font-weight: 600;
                             opacity: .9;
                         }
                     }
@@ -423,6 +442,7 @@ $web-color:rgb(23, 82, 191);
                 
                 .addn{
                     padding-top:4.7rem;
+                    padding-right: 1rem;
                     font-weight: 600;
                     .country-name{
                         text-transform: capitalize;
@@ -508,15 +528,17 @@ $web-color:rgb(23, 82, 191);
     h1{
         font-size: 1.8rem;
         font-weight: 600;
+        color: $web-color;
         text-transform: capitalize;
         text-align: center;
         text-decoration: underline;
     }
 }
 .canvas{
-        width: 80%;
+        width: 100%;
         margin: 5rem auto;
-        max-width: 800px;
+        max-width: 1000px;
+        padding: 0 1rem;
         display: none;
 }
 
@@ -524,6 +546,34 @@ $web-color:rgb(23, 82, 191);
 .show-graph{
     display: block;
 
+}
+
+
+@media screen and (max-width:500px) {
+    .country-info-section .c-div .content-div{
+        .country-div{
+            .country-name{
+                font-size: 2rem;
+            }
+            .img-popln .population-img .total-population{
+                font-size: 1.3rem;
+            }
+        }
+    } 
+
+    .table-section .table-container .table-container-content .flex-wrapper .table-info{
+        .table-h{
+            font-size: 1.7rem;
+        }
+        .tests-table{
+            .table-header{
+                font-size: 1.4rem;
+            }
+            .table-data{
+                font-size: 1.4rem;
+            }
+        }
+    }
 }
 
 </style>

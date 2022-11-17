@@ -1,7 +1,17 @@
 {
   "name": "covid-report-analysis",
-  "version": "0.1.0",
+  "author":"Stancillous Raymond (https://stanceray.com/)",
+  "description":"cyHealth Covid-19 Analysis System",
+  "homepage": "https://github.com/stancillous/cyHealth#readme",
   "private": true,
+  "bugs": {
+    "url": "https://github.com/stancillous/cyHealth/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stancillous/cyHealth.git"
+  },
+  "version": "0.1.0",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
