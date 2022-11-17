@@ -224,7 +224,7 @@
         
                     },
                     {
-                    label: 'critical cases',
+                    label: 'new cases',
                     data:this.cases,
                     borderWidth: 1,
                     tension: .3
