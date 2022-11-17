@@ -442,6 +442,7 @@ $web-color:rgb(23, 82, 191);
                 
                 .addn{
                     padding-right: .5rem;
+                    padding-bottom:.3rem;
                     font-weight: 600;
                     .country-name, .continent-name{
                         white-space: nowrap;
