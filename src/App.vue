@@ -1,30 +1,30 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+
+  <!-- <HomePageComp/> -->
+
+  <router-view></router-view>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+// import HomePageComp from './components/HomePage.vue'
+  export default{
+          data(){
+            return{
+                selectedCountry:'afghanistan',
+              }
+          },
 
-nav {
-  padding: 30px;
+          provide:{
+            API_KEY:'51f4c83034mshb76b94cb1a5ccdfp10d9e3jsn296bc6fe16c0'
+          },
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+    components:{
+      // HomePageComp
     }
   }
-}
+</script>
+
+<style lang="scss">
+
+
 </style>
