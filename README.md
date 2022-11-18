@@ -1,4 +1,4 @@
-<h3>CyHealth Covid-19 Analysis</h3>
+<h2>CyHealth Covid-19 Analysis</h2>
 <p>An easy and simple way to get Covid-19 analysis for any country</p>
 
 ## Project setup
