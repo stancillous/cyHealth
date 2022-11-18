@@ -130,8 +130,8 @@
                 deaths:[],
                 cases:[],
                 tests:[],
-                // labels:['2022-11-04','2022-11-06','2022-11-07','2022-11-08','2022-11-09','2022-11-10','2022-11-11','2022-11-12','2022-11-13','2022-11-14','2022-11-15','2022-11-16']
-                labels:['2022-11-12','2022-11-13','2022-11-14','2022-11-15','2022-11-16']
+                // labels:['2022-11-12','2022-11-13','2022-11-14','2022-11-15','2022-11-16']
+                labels:[]
             }
         },
 
@@ -139,7 +139,6 @@
 
         mounted(){
             this.getCountryStats()
-            this.sfcFuncs()
 
         },
         methods:{
@@ -190,8 +189,7 @@
                     this.tests.push(data.response[index].tests['1M_pop']/100)
                     }
 
-                    //function to add elements to the date's arrays and call the drawChart function
-                    this.getHistory()
+                    this.sfcFuncs()
 
              
                 } catch (error) {
@@ -224,7 +222,7 @@
         
                     },
                     {
-                    label: 'new cases',
+                    label: 'critical cases',
                     data:this.cases,
                     borderWidth: 1,
                     tension: .3
@@ -299,38 +297,23 @@
 
             },
 
-            async getHistory(){
-                //c get current date
-                let todaysDate = new Date().toISOString()
-                    let paramDate =  todaysDate.slice(0,todaysDate.indexOf('T'))
-
-                let response = await fetch(`https://covid-193.p.rapidapi.com/history?country=${this.countryName}&day=${paramDate}`,
-                {
-                    method: 'GET',
-                    headers: {
-                        'X-RapidAPI-Key': this.API_KEY,
-                        'X-RapidAPI-Host': 'covid-193.p.rapidapi.com'
-                    }
-                })
-                let data = await response.json()
-     
-                    this.deaths.push(data.response[0].deaths['1M_pop'])
-                    this.cases.push(data.response[0].cases.critical)
-                    this.tests.push(data.response[0].tests['1M_pop']/100)
-
-                    this.labels.push(paramDate)
-                    this.labels.shift()
-                    this.deaths.shift()
-                    this.cases.shift()
-                    this.tests.shift()
-
-                    //draw chart
-                    this.drawChart()
-
-
-            },
 
             sfcFuncs(){
+                let defArray = [1,2,3,4,5]
+ 
+                let arr = [...defArray.keys()].map((index)=>{
+                    const date = new Date()
+                    date.setDate(date.getDate() - index);
+                    let dateISO = date.toISOString()
+                    let paramDate =  dateISO.slice(0,dateISO.indexOf('T'))
+                    this.labels.push(paramDate)
+
+                })
+                console.log(arr.indexOf(9))
+                this.labels.reverse()
+
+                    this.drawChart()
+
                 let hideGraphDiv = document.querySelector('.show-hide-graph')
                 hideGraphDiv.addEventListener('click',()=>{
                     document.querySelector('.canvas').classList.toggle('show-graph')
@@ -408,7 +391,6 @@ $web-color:rgb(23, 82, 191);
         margin: 3rem auto;
         padding: 0 5rem;
         padding: 0 4rem 0 5rem;
-        // border-bottom: 1px solid $borderColors ;
         .c-div{
             .content-div{
                 display: flex;
@@ -421,7 +403,6 @@ $web-color:rgb(23, 82, 191);
                         font-size: 3rem;
                         text-transform: uppercase;
                         color: $web-color;
-                        
                     }
                     
                     .img-popln{
@@ -442,7 +423,6 @@ $web-color:rgb(23, 82, 191);
                 
                 .addn{
                     padding-right: .5rem;
-                    padding-bottom:.3rem;
                     font-weight: 600;
                     .country-name, .continent-name{
                         white-space: nowrap;
@@ -543,7 +523,6 @@ $web-color:rgb(23, 82, 191);
 //class to show the hidden graph
 .show-graph{
     display: block;
-
 }
 
 
